@@ -50,6 +50,7 @@ function refresh(callback) {
 	params.append('grant_type', 'refresh_token');
 
 
+
 	return new Promise(function(resolve, reject){
 		//TODO: use fetch() to use the refresh token to get a new access token.
 		//body and headers arguments will be similar the /callback endpoint.
@@ -57,8 +58,7 @@ function refresh(callback) {
 			method: 'POST',
 			headers: _headers,
 			body: params
-		}).then(response => response.json())
-		.then(function(info){
+		}).then(function(info){
 			//When the fetch() promise completes, parse the response.
 			access_token = info.access_token;
 			refresh_token = info.refresh_token;
@@ -82,23 +82,23 @@ function makeAPIRequest(spotify_endpoint, res) {
 		'Authorization': 'Bearer ' + access_token
 	};
 
-	const params = new URLSearchParams();
-	params.append('refresh_token', refresh_token);
-	params.append('grant_type', 'refresh_token');
-
-
 	//TODO: use fetch() to make the API call.
 	return new Promise(function(resolve, reject){
-		fetch('https://api.spotify.com/v1/me', {
-			//body and headers arguments will be similar the /callback endpoint.
+		fetch(spotify_endpoint, {
 			method: 'GET',
-			headers: headers,
-			body: params
-		}).then(response => response.json())
-		.then(function(info){
-			
+			json: true,
+			headers: headers
+		}).then(function(body){
+			//parse the response send it back to the Angular client with res.json()
+			console.log(body);
+			//console.log(response.json());
+			//return res.json(response); 
+		}).then(function(info){
 			resolve(info.statuses);
 		}).catch(function(error){
+			//Once refresh() is working, check whether the status code is 401 (unauthorized)
+			//If so, refresh the access token and make the API call again.
+
 			return error.message;
 		});
 	});
@@ -149,8 +149,7 @@ router.get('/callback', function(req, res, next) {
 			method: 'POST',
 			headers: _headers,
 			body: params
-		}).then(response => response.json())
-		.then(function(info){
+		}).then(function(info){
 			//When the fetch() promise completes, parse the response.
 			//console.log(info);
 			access_token = info.access_token;
