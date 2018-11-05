@@ -1,4 +1,4 @@
---Readme document for *Mario Gomez & Nickolas Saba*, *gomezms@uci.edu nssaba@uci.edu*, *44978962 ...*--
+--Readme document for *Mario Gomez & Nickolas Saba*, *gomezms@uci.edu nssaba@uci.edu*, *44978962 14915184*--
 
 1. How long, in hours, did it take you to complete this assignment?
 
