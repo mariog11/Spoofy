@@ -86,19 +86,17 @@ function makeAPIRequest(spotify_endpoint, res) {
 	return new Promise(function(resolve, reject){
 		fetch(spotify_endpoint, {
 			method: 'GET',
-			json: true,
 			headers: headers
-		}).then(function(body){
-			//parse the response send it back to the Angular client with res.json()
-			console.log(body);
-			//console.log(response.json());
-			//return res.json(response); 
-		}).then(function(info){
-			resolve(info.statuses);
+		//parse the response send it back to the Angular client with res.json()
+		}).then(res=>{
+			return res.json();
+		}).then(info=>{
+			return res.json(info);
+		//Once refresh() is working, check whether the status code is 401 (unauthorized)
 		}).catch(function(error){
-			//Once refresh() is working, check whether the status code is 401 (unauthorized)
 			//If so, refresh the access token and make the API call again.
-
+			this.refresh();
+			this.makeAPIRequest(spotify_endpoint, res);
 			return error.message;
 		});
 	});
@@ -149,7 +147,8 @@ router.get('/callback', function(req, res, next) {
 			method: 'POST',
 			headers: _headers,
 			body: params
-		}).then(function(info){
+		}).then(response => response.json())
+		.then(function(info){
 			//When the fetch() promise completes, parse the response.
 			//console.log(info);
 			access_token = info.access_token;
