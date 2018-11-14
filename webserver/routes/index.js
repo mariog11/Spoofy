@@ -42,26 +42,22 @@ function readTokenAndClientSecretFiles(callback) {
 
 function refresh(callback) {
 	var _headers = {
-		'Content-Type':'application/x-www-form-urlencoded',
-		'Authorization': 'Bearer ' + access_token
+		'Authorization': 'Basic ' + Buffer.from(my_client_id + ':' + my_client_secret).toString('base64')
 	};
+
 	const params = new URLSearchParams();
+	params.append('grant_type','refresh_token');
 	params.append('refresh_token', refresh_token);
-	params.append('grant_type', 'refresh_token');
-
-
 
 	return new Promise(function(resolve, reject){
-		//TODO: use fetch() to use the refresh token to get a new access token.
-		//body and headers arguments will be similar the /callback endpoint.
 		fetch('https://accounts.spotify.com/api/token', {
 			method: 'POST',
 			headers: _headers,
 			body: params
-		}).then(function(info){
+		}).then(response => response.json())
+		.then(function(info){
 			//When the fetch() promise completes, parse the response.
 			access_token = info.access_token;
-			refresh_token = info.refresh_token;
 			//Then, use writeTokenFile() to write the token file. Pass it a callback function for what should occur once the file is written.
 			writeTokenFile(function(){
 				//Once the token is written, redirect the user back to the Angular client with res.redirect().
@@ -72,7 +68,6 @@ function refresh(callback) {
 			return error.message;
 		});
 	});
-
 }
 
 
@@ -95,7 +90,8 @@ function makeAPIRequest(spotify_endpoint, res) {
 		//Once refresh() is working, check whether the status code is 401 (unauthorized)
 		}).catch(function(error){
 			//If so, refresh the access token and make the API call again.
-			this.refresh();
+			this.refresh(function(){
+			});
 			this.makeAPIRequest(spotify_endpoint, res);
 			return error.message;
 		});

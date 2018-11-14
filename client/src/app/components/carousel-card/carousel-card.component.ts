@@ -8,10 +8,13 @@ import { ResourceData } from '../../data/resource-data';
 })
 export class CarouselCardComponent implements OnInit {
   @Input() resource:ResourceData;
+  localURL:string;
 
   constructor() { }
 
   ngOnInit() {
+  	console.log(this.resource);
+  	this.localURL = "http://localhost:4200/" + this.resource.category + "/" + this.resource.id;
   }
 
 }

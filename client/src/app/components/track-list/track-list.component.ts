@@ -16,4 +16,16 @@ export class TrackListComponent implements OnInit {
   ngOnInit() {
   }
 
+  getTrackURL(i) : string {
+    return "http://localhost:4200/track/" + this.tracks[i].id;
+  }
+
+  getAlbumURL(i) : string {
+    return "http://localhost:4200/album/" + this.tracks[i].id;
+  }
+
+  getArtistURL(i) : string {
+    return "http://localhost:4200/artist/" + this.tracks[i].artists[0].id;
+  }
+
 }

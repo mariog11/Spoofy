@@ -15,13 +15,18 @@ export class AboutComponent implements OnInit {
   constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit() {
+   
   }
 
-  /*TODO: create a function which gets the "about me" information from Spotify when the button in the view is clicked.
-  In that function, update the name, profile_pic, and profile_link fields */
-  function loadAbout(): void{ 
-    //var image = this.spotifyService.aboutMe().images.url;
-    //console.log(image);
+  //TODO: create a function which gets the "about me" information from Spotify when the button in the view is clicked.
+  //In that function, update the name, profile_pic, and profile_link fields 
+  loadAbout() {
+    var _this = this;
+    this.spotifyService.aboutMe().then(function(response){
+      let response_data = JSON.parse(JSON.stringify(response));
+      _this.name = response_data.name;
+      _this.profile_pic = response_data.imageURL;
+      _this.profile_link = response_data.spotifyProfile;
+    });
   }
-
 }
