@@ -16,7 +16,7 @@ https://gka.github.io/chroma.js/
 
 Nickolas Saba - partner; everything about the assignment
 Mario Gomez - partner; everything about the assignment
-Kimberly Flores - asked about thermometer; learned about the existence of track-features.ts
+Kimberly Flores - asked about thermometer; learned about the existence of track-features.ts and zone aware promises
 
 4. Did you add any bonus features to your submission? If so, what are they and how should we see them?
 
