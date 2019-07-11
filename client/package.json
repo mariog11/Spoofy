@@ -16,7 +16,6 @@
     "@angular/compiler": "^8.1.1",
     "@angular/core": "~7.0.0",
     "@angular/forms": "~7.0.0",
-    "@angular/http": "~7.0.0",
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
@@ -24,14 +23,16 @@
     "chroma-js": "^1.4.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
-    "zone.js": "~0.8.26"
+    "tslib": "^1.9.0",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.801.1",
-    "@angular/cli": "~7.0.1",
+    "@angular-devkit/build-angular": "~0.801.1",
+    "@angular/cli": "~8.1.1",
     "@angular/compiler-cli": "^8.1.1",
     "@angular/language-service": "~7.0.0",
     "@types/node": "~8.9.4",
+    "codelyzer": "^5.0.1",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "^3.1.6"
