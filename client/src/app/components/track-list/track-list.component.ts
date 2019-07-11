@@ -17,15 +17,15 @@ export class TrackListComponent implements OnInit {
   }
 
   getTrackURL(i) : string {
-    return "http://localhost:4200/track/" + this.tracks[i].id;
+    return "/browse/songs/" + this.tracks[i].id;
   }
 
   getAlbumURL(i) : string {
-    return "http://localhost:4200/album/" + this.tracks[i].id;
+    return "/browse/albums/" + this.tracks[i].album.id;
   }
 
   getArtistURL(i) : string {
-    return "http://localhost:4200/artist/" + this.tracks[i].artists[0].id;
+    return "/browse/artists/" + this.tracks[i].artists[0].id;
   }
 
 }

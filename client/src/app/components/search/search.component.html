@@ -1,7 +1,5 @@
-<h1>Search Spotify</h1>
 <input (keyup)="onKey($event)" (keyup.enter)="search()">
-<select id="Drop" (change)="updateCategory($event)">
-</select>
+<select id="Drop" (change)="updateCategory($event)"></select>
 <button class="btn btn-light" (click)="search()">Search</button>
 <app-carousel *ngIf="!isTrack && isAlbumOrArtist" [resources] = 'resources' [carouselId]="'myId'"></app-carousel>
 <app-track-list *ngIf="isTrack" [tracks] = 'resources'></app-track-list>

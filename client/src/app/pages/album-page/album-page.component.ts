@@ -15,12 +15,10 @@ export class AlbumPageComponent implements OnInit {
 	album:AlbumData;
 	tracks:TrackData[];
 
-
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { }
 
   ngOnInit() {
   	this.albumId = this.route.snapshot.paramMap.get('id');
-  	//TODO: inject spotifyService and use it to get the album data and the tracks for the album
     var _this = this;
     this.spotifyService.getAlbum(this.albumId).then(function(response){
       _this.album = response;

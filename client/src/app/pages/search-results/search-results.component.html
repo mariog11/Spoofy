@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+      <div class="col-12">
+          <h1>Results for '{{searchString}}'</h1>
+          <h2>Top Tracks</h2>
+          <app-track-list *ngIf="tracksAvailable" [tracks] = 'tracks'></app-track-list>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12 col-lg-6">
+          <h2>Albums</h2>
+          <app-carousel *ngIf="albumsAvailable" [resources] = 'albums' [carouselId]="'idA'"></app-carousel>
+      </div>
+      <div class="col-12 col-lg-6">
+          <h2>Artists</h2>
+          <app-carousel *ngIf="artistsAvailable" [resources] = 'artists' [carouselId]="'bidBoy'"></app-carousel>
+      </div>
+  </div>
+</div>

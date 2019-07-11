@@ -15,6 +15,23 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { SearchComponent } from './components/search/search.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ThermometerComponent } from './components/thermometer/thermometer.component';
+import { LandingComponent } from './pages/landing/landing.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { DashbarComponent } from './components/dashbar/dashbar.component';
+import { BrowseComponent } from './pages/browse/browse.component';
+import { SearchResultsComponent } from './pages/search-results/search-results.component';
+import { SongsComponent } from './pages/browse/songs/songs.component';
+import { AlbumsComponent } from './pages/browse/albums/albums.component';
+import { ArtistsComponent } from './pages/browse/artists/artists.component';
+import { PlaylistsComponent } from './pages/browse/playlists/playlists.component';
+import { SongsHomeComponent } from './pages/browse/songs/songs-home/songs-home.component';
+import { SongsSearchComponent } from './pages/browse/songs/songs-search/songs-search.component';
+import { ArtistsHomeComponent } from './pages/browse/artists/artists-home/artists-home.component';
+import { ArtistsSearchComponent } from './pages/browse/artists/artists-search/artists-search.component';
+import { AlbumsSearchComponent } from './pages/browse/albums/albums-search/albums-search.component';
+import { AlbumsHomeComponent } from './pages/browse/albums/albums-home/albums-home.component';
+import { PlaylistsHomeComponent } from './pages/browse/playlists/playlists-home/playlists-home.component';
+import { PlaylistsSearchComponent } from './pages/browse/playlists/playlists-search/playlists-search.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +45,24 @@ import { ThermometerComponent } from './components/thermometer/thermometer.compo
     CarouselComponent,
     SearchComponent,
     HomePageComponent,
-    ThermometerComponent
+    ThermometerComponent,
+    LandingComponent,
+    NavbarComponent,
+    DashbarComponent,
+    BrowseComponent,
+    SearchResultsComponent,
+    SongsComponent,
+    AlbumsComponent,
+    ArtistsComponent,
+    PlaylistsComponent,
+    SongsHomeComponent,
+    SongsSearchComponent,
+    ArtistsHomeComponent,
+    ArtistsSearchComponent,
+    AlbumsSearchComponent,
+    AlbumsHomeComponent,
+    PlaylistsHomeComponent,
+    PlaylistsSearchComponent
   ],
   imports: [
     BrowserModule,

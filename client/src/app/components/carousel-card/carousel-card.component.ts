@@ -13,8 +13,7 @@ export class CarouselCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  	console.log(this.resource);
-  	this.localURL = "http://localhost:4200/" + this.resource.category + "/" + this.resource.id;
+  	this.localURL = "/browse/" + this.resource.category + "/" + this.resource.id;
   }
 
 }

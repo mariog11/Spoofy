@@ -115,8 +115,6 @@ router.get('*', function(req, res, next) {
 router.get('/login', function(req, res, next) {
 	var scopes = 'user-read-private user-read-email';
 
-	//TODO: use res.redirect() to send the user to Spotify's authentication page.
-	//Use encodeURIComponent() to make escape necessary characters.
 	res.redirect('https://accounts.spotify.com/authorize' +
 	  '?response_type=code' +
 	  '&client_id=' + my_client_id +
@@ -138,20 +136,15 @@ router.get('/callback', function(req, res, next) {
 	};
 
 	return new Promise(function(resolve, reject){
-		//TODO: use fetch() to exchange the code for an access token and refresh token.
 		fetch('https://accounts.spotify.com/api/token', {
 			method: 'POST',
 			headers: _headers,
 			body: params
 		}).then(response => response.json())
 		.then(function(info){
-			//When the fetch() promise completes, parse the response.
-			//console.log(info);
 			access_token = info.access_token;
 			refresh_token = info.refresh_token;
-			//Then, use writeTokenFile() to write the token file. Pass it a callback function for what should occur once the file is written.
 			writeTokenFile(function(){
-				//Once the token is written, redirect the user back to the Angular client with res.redirect().
 				res.redirect(client_uri);
 			});
 			resolve(info.statuses);

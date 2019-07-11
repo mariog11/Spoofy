@@ -1,0 +1,13 @@
+app-dashbar{
+    background-color: #292a2e;
+}
+
+#main-container{
+    padding-top: 83px;
+}
+
+@media (min-width: 1200px){
+    #main-row{
+        min-height: 100vh;
+    }
+}

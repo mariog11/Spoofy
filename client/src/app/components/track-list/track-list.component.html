@@ -12,11 +12,11 @@
 		<tr *ngFor="let track of tracks; let i = index">
 			<td>{{i + 1}}</td>
 			<td>
-				<a [href]="getTrackURL(i)">{{track.name}}</a>
+				<a [routerLink]="getTrackURL(i)">{{track.name}}</a>
 			</td>
 			<td>{{(track.duration_ms/1000)/60| number:'1.0-0'}}:{{ ((track.duration_ms/1000)%60| number:'2.0-0') }}</td>
-			<td *ngIf="hideArtist==false"><a [href]="getArtistURL(i)">{{track.artists[0].name}}</a></td>
-			<td *ngIf="hideAlbum==false"><a [href]="getAlbumURL(i)">{{track.album.name}}</a></td>
+			<td *ngIf="hideArtist==false"><a [routerLink]="getArtistURL(i)">{{track.artists[0].name}}</a></td>
+			<td *ngIf="hideAlbum==false"><a [routerLink]="getAlbumURL(i)">{{track.album.name}}</a></td>
 		</tr>
 	</tbody>
 </table>
