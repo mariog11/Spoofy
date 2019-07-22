@@ -1,0 +1,17 @@
+.album-card{
+    text-align:center;
+    transition: 0.3s;
+}
+
+.album-card a{
+    transition: 0.3s;
+}
+
+.album-card a:hover{
+    opacity:0.7;
+    background-size: 0px;
+}
+
+.album-card-img{
+    height: 255px;
+}

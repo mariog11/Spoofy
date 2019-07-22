@@ -21,5 +21,10 @@ button, .btn {
 }
 
 a {
-	color: var(--orange);
+	color: #FFF;
+}
+
+a:hover{
+	color: gray;
+	text-decoration: none;
 }

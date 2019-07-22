@@ -1,0 +1,51 @@
+<div *ngIf="artist" class="jumbotron jumbotron-fluid" [ngStyle]="{'background-image': 'url(' + artist.imageURL + ')', 'background-position': 'center', 'background-repeat': 'repeat-x'}">
+	<div class="container" id="filter">
+		<div class="row">
+			<div class="col-12 spotify-info">
+				<h1 class="display-4">{{artist.name}}</h1>
+				<p class="lead">This is {{artist.name}}'s page where you can view their top tracks, albums, and similar artists</p>
+				<a class="btn btn-success" [attr.href]="artist.url" target="_blank" role="button">Open {{artist.name}} on Spotify</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container" *ngIf="artist">
+	<div class="row">
+		<div class="col-12 col-md-9">
+			<h3>Top Tracks</h3>
+			<app-track-list [tracks] = 'topTracks'></app-track-list>
+		</div>
+		<div class="col-12 col-md-3">
+			<h3>Genres</h3>
+			<ul>
+				<li *ngFor="let genre of artist.genres">{{genre}}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="row">
+				<div class="col-12">
+					<h3>Albums</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-sm-6 col-lg-4" *ngFor="let album of albums">
+					<app-album-card  [resource]='album'></app-album-card>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="row">
+				<div class="col-12">
+					<h3>Similar Artists</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-sm-6 col-lg-4" *ngFor="let artist of relatedArtists">
+					<app-artist-card  [resource]='artist'></app-artist-card>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

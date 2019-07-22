@@ -1,3 +1,10 @@
-<p>
-  artists-search works!
-</p>
+<div class="container" id="artists-search">
+    <div class="row">
+        <div class="col-12">
+            <h2>Results for '{{searchString}}'</h2>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4" *ngFor="let resource of artists">
+            <app-artist-card  [resource]='resource'></app-artist-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.search-card{
+    text-align:center;
+    transition: 0.3s;
+}
+
+.search-card a{
+    transition: 0.3s;
+}
+
+.search-card a:hover{
+    opacity:0.7;
+    background-size: 0px;
+}
+
+.search-card-img{
+    height: 255px;
+}

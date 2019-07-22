@@ -1,0 +1,25 @@
+<div class="container" id="albums-page">
+	<div class="row">
+		<div class="col-12">
+			<h1>Album</h1>
+		</div>
+	</div>
+	<div *ngIf="album" class="row">
+		<div class="col-12 col-md-6">
+			<a [href]='album.url' target="_blank" role="button"><img class="album-image" [src]="album.imageURL"></a>
+			<div class="album-detail">
+				<h2 class="album-name">{{album.name}}</h2>
+				<span *ngFor="let artist of album.artists; let isLast=last">
+					<a routerLink="/browse/artists/{{artist.id}}">{{artist.name}}</a>{{isLast ? '' : ', '}}
+				</span><br/>
+				<small *ngIf="tracks">{{album.releaseDate}} - {{tracks.length}} Songs</small>
+				<p>
+					<a class="btn btn-outline-success" [attr.href]="album.url" target="_blank" role="button">Open Album on Spotify</a>
+				</p>
+			</div>
+		</div>
+		<div class="col-12 col-md-6">
+			<app-track-list [tracks] = 'tracks' [hideArtist]='true' [hideAlbum]='true'></app-track-list>
+		</div>
+	</div>
+</div>

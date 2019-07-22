@@ -1,0 +1,26 @@
+<div class="container" id="songs-page">
+	<div class="row">
+		<div class="col-12">
+			<h1>Song</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div *ngIf="track" class="col-12 col-md-6">
+			<a [href]='track.url' target="_blank" role="button"><img [src]="track.imageURL" class="track-image"></a>
+			<div class="track-detail">
+				<h2 class="track-name">{{track.album.name}}</h2>
+				<span *ngFor="let artist of track.album.artists; let isLast=last">
+					<a routerLink="/browse/artists/{{artist.id}}">{{artist.name}}</a>{{isLast ? '' : ', '}}
+				</span><br/>
+				<small>{{track.album.releaseDate}}</small>
+				<p>
+					<a class="btn btn-outline-success" [attr.href]='track.url' target="_blank" role="button">Open Song on Spotify</a>
+				</p>
+			</div>
+		</div>
+		<div class="col-12 col-md-6" *ngIf="audioFeatures">
+			<app-track-info [track]="track"></app-track-info>
+			<app-thermometer *ngFor="let feature of featureTypes" [featureType]="feature" [featureDecimal]="audioFeatures.percent(feature)" [featureColor]="audioFeatures.color(feature)"></app-thermometer>
+		</div>
+	</div>
+</div>

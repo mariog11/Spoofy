@@ -11,3 +11,8 @@ app-dashbar{
         min-height: 100vh;
     }
 }
+
+.nav-root{
+    padding-left: 0;
+    padding-right: 0;
+}

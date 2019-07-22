@@ -1,9 +1,8 @@
-<div class="container">
+<div class="container" id="songs-search">
     <div class="row">
         <div class="col-12">
-            <h1>Results for '{{searchString}}'</h1>
-            <h2>Top Tracks</h2>
+            <h2>Results for '{{searchString}}'</h2>
             <app-track-list *ngIf="tracksAvailable" [tracks] = 'tracks'></app-track-list>
         </div>
     </div>
-  </div>
+</div>

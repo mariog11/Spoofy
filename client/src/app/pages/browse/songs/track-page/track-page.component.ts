@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArtistData } from '../../data/artist-data';
-import { TrackData } from '../../data/track-data';
-import { AlbumData } from '../../data/album-data';
-import { TrackFeatures } from '../../data/track-features';
-import { SpotifyService } from '../../services/spotify.service';
+import { ArtistData } from '../../../../data/artist-data';
+import { TrackData } from '../../../../data/track-data';
+import { AlbumData } from '../../../../data/album-data';
+import { TrackFeatures } from '../../../../data/track-features';
+import { SpotifyService } from '../../../../services/spotify.service';
 
 @Component({
   selector: 'app-track-page',

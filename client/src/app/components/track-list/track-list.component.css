@@ -1,3 +1,37 @@
-table {
+/* table {
 	color: var(--dark);
+} */
+.track-list{
+	list-style-type:none;
+	padding-inline-start: 0;
+}
+
+.track-info{
+    padding: 6px 5px 6px 5px;
+    border-style: solid;
+    border-width: 1px 0px 0px 0px;
+    border-color: #808080;
+}
+
+.track-info h5{
+    margin-bottom:0;
+}
+
+.track-info p{
+    margin-bottom:0;
+}
+
+.track-info-last{
+    padding: 6px 5px 6px 5px;
+    border-style: solid;
+    border-width: 1px 0px 1px 0px;
+    border-color: #808080;
+}
+
+.track-info-last h5{
+    margin-bottom:0;
+}
+
+.track-info-last p{
+    margin-bottom:0;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service'
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-about',
@@ -7,23 +8,21 @@ import { SpotifyService } from '../../services/spotify.service'
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  name:string = null;
-  profile_pic:string = "../../../assets/unknown.jpg";
-  profile_link:string = null;
+  infoLoaded:boolean;
+  name:string;
+  profile_pic:string;
+  profile_link:string;
 
-  constructor(private spotifyService: SpotifyService) { }
+  constructor(private route:ActivatedRoute,private router:Router,private spotifyService: SpotifyService) { }
 
   ngOnInit() {
-   
-  }
-
-  loadAbout() {
     var _this = this;
     this.spotifyService.aboutMe().then(function(response){
       let response_data = JSON.parse(JSON.stringify(response));
       _this.name = response_data.name;
       _this.profile_pic = response_data.imageURL;
       _this.profile_link = response_data.spotifyProfile;
+      _this.infoLoaded = true;
     });
   }
 }

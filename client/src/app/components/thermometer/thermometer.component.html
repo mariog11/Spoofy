@@ -1,5 +1,13 @@
-<div class="progress">
-  	<div class="progress-bar" role="progressbar" [style.width]="featureDecimal" [style.background-color]="featureColor">
-  		{{featureType}}: {{featureDecimal}}
+
+<div class="d-flex w-100 justify-content-between align-items-center">
+	<div class="col-4 type">
+		<p>{{featureType}}</p>
+	</div>
+	<div class="col-8">
+		<div class="progress">
+			<div class="progress-bar" role="progressbar" [style.width]="featureDecimal" [style.background-color]="featureColor">
+					{{featureDecimal}}
+			</div>
+		</div>
 	</div>
 </div>

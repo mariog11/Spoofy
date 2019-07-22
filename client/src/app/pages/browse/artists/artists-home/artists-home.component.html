@@ -1,3 +1,10 @@
-<p>
-  artists-home works!
-</p>
+<div class="container" id="artists-home">
+    <div class="row">
+        <div class="col-12">
+            <h1>Artist Library</h1>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4" *ngFor="let resource of artists">
+            <app-artist-card  [resource]='resource'></app-artist-card>
+        </div>
+    </div>
+  </div>

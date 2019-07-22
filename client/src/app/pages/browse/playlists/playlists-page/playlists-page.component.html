@@ -1,0 +1,26 @@
+<div class="container" id="playlists-page">
+    <div class="row">
+        <div class="col-12">
+            <h1>Playlist</h1>
+        </div>
+    </div>
+    <div *ngIf="playlist" class="row">
+        <div class="col-12 col-md-6">
+            <div class="playlists-detail">
+                <a [href]='playlist.url' target="_blank" role="button"><img class="playlists-image" [src]="playlist.imageURL"></a>
+                <h2 class="playlists-name">{{playlist.name}}</h2>
+                <span>
+                    {{playlist.owner}}
+                </span><br/>
+                <small>{{playlist.trackLength}} Songs</small>
+                <p>
+                    <a class="btn btn-outline-success" [attr.href]="playlist.url" target="_blank" role="button">Open Playlist on Spotify</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-12 col-md-6" *ngIf="tracks">
+            <app-track-list [tracks] = 'tracks'></app-track-list>
+        </div>
+    </div>
+</div>
+    

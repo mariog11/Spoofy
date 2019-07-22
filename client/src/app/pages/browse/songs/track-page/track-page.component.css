@@ -1,0 +1,26 @@
+#songs-page{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.track-image{
+    width: 100%;
+    margin-bottom:8px;
+}
+
+a .track-image{
+    transition: 0.3s;
+}
+
+a:hover .track-image{
+    opacity:0.7;
+    background-size: 0px;
+}
+
+.track-detail{
+	text-align: center;
+}
+
+.track-name{
+	padding-top:10px;
+}

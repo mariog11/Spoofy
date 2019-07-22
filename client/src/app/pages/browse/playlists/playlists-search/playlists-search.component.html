@@ -1,3 +1,10 @@
-<p>
-  playlists-search works!
-</p>
+<div class="container" id="playlists-search">
+    <div class="row">
+        <div class="col-12">
+            <h2>Results for '{{searchString}}'</h2>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4" *ngFor="let resource of playlists">
+            <app-album-card  [resource]='resource'></app-album-card>
+        </div>
+    </div>
+</div>

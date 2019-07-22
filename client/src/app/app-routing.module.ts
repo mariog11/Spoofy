@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
-import { TrackPageComponent } from './pages/track-page/track-page.component';
-import { AlbumPageComponent } from './pages/album-page/album-page.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ArtistPageComponent } from './pages/browse/artists/artist-page/artist-page.component';
+import { TrackPageComponent } from './pages/browse/songs/track-page/track-page.component';
+import { AlbumPageComponent } from './pages/browse/albums/album-page/album-page.component';
+import { HomePageComponent } from './pages/browse/home-page/home-page.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { BrowseComponent } from './pages/browse/browse.component';
-import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { AlbumsComponent } from './pages/browse/albums/albums.component';
 import { SongsComponent } from './pages/browse/songs/songs.component';
 import { ArtistsComponent } from './pages/browse/artists/artists.component';
@@ -19,6 +18,7 @@ import { AlbumsHomeComponent } from './pages/browse/albums/albums-home/albums-ho
 import { AlbumsSearchComponent } from './pages/browse/albums/albums-search/albums-search.component';
 import { PlaylistsHomeComponent } from './pages/browse/playlists/playlists-home/playlists-home.component';
 import { PlaylistsSearchComponent } from './pages/browse/playlists/playlists-search/playlists-search.component';
+import { PlaylistsPageComponent } from './pages/browse/playlists/playlists-page/playlists-page.component';
 
 const routes: Routes = [
 	{ 
@@ -26,7 +26,6 @@ const routes: Routes = [
 		component: BrowseComponent,
 		children: [
 			{ path: '', component: HomePageComponent},
-			{ path: 'search/:searchString', component: SearchResultsComponent},
 			{ 
 				path: 'artists', 
 				component: ArtistsComponent,
@@ -59,6 +58,7 @@ const routes: Routes = [
 				component: PlaylistsComponent,
 				children: [
 					{ path: '',component:PlaylistsHomeComponent},
+					{ path: ':id', component: PlaylistsPageComponent},
 					{ path: 'search/:searchString', component: PlaylistsSearchComponent}
 				]
 			}

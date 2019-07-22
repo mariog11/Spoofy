@@ -1,0 +1,26 @@
+#albums-page{
+	padding-top:10px;
+    padding-bottom:10px;
+}
+
+.album-image {
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+a .album-image{
+    transition: 0.3s;
+}
+
+a:hover .album-image{
+    opacity:0.7;
+    background-size: 0px;
+}
+
+.album-detail{
+	text-align: center;
+}
+
+.album-name{
+	padding-top:10px;
+}

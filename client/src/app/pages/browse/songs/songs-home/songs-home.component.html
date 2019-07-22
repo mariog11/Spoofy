@@ -1,3 +1,8 @@
-<p>
-  songs-home works!
-</p>
+<div class="container" id="songs-home">
+  <div class="row">
+    <div class="col-12">
+      <h1>Song Library</h1>
+      <app-track-list *ngIf="tracksAvailable" [tracks] = 'tracks'></app-track-list>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { TrackData } from '../data/track-data';
 import { ResourceData } from '../data/resource-data';
 import { ProfileData } from '../data/profile-data';
 import { TrackFeatures } from '../data/track-features';
+import { PlaylistData } from '../data/playlist-data';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,38 @@ export class SpotifyService {
       return new ProfileData(data);
     });
   }
+  
+  getUserTracks():Promise<TrackData[]> {
+    return this.sendRequestToExpress('/user-tracks/').then((data) => {
+      return data.items.map((trackObj) => {
+        return new TrackData(trackObj.track);
+      });
+    });
+  }
+
+  getUserArtists():Promise<ArtistData[]> {
+    return this.sendRequestToExpress('/user-artists/').then((data) => {
+      return data.artists.items.map((artist) => {
+        return new ArtistData(artist);
+      });
+    });
+  }
+
+  getUserAlbums():Promise<AlbumData[]> {
+    return this.sendRequestToExpress('/user-albums').then((data) => {
+      return data.items.map((albumObj) => {
+        return new AlbumData(albumObj.album);
+      });
+    });
+  }
+
+  getUserPlaylists():Promise<PlaylistData[]> {
+    return this.sendRequestToExpress('/user-playlists').then((data) => {
+      return data.items.map((playlist) => {
+        return new PlaylistData(playlist);
+      });
+    });
+  }
 
   searchFor(category:string, resource:string):Promise<ResourceData[]> {
     return this.sendRequestToExpress('/search/' + category + '/' + encodeURIComponent(resource)).then((data) => {
@@ -44,6 +77,19 @@ export class SpotifyService {
           return new AlbumData(album);
         });
       }
+      else if(category == 'playlist') {
+        return data.playlists.items.map((playlist) => {
+          return new PlaylistData(playlist);
+        });
+      }
+    });
+  }
+
+  getFeaturedPlaylists():Promise<PlaylistData[]> {
+    return this.sendRequestToExpress('/featured-playlists').then((data) => {
+      return data.playlists.items.map((playlist) => {
+        return new PlaylistData(playlist);
+      });
     });
   }
 
@@ -80,6 +126,20 @@ export class SpotifyService {
   getAlbum(albumId:string):Promise<AlbumData> {
     return this.sendRequestToExpress('/album/' + encodeURIComponent(albumId)).then((data) => {
       return new AlbumData(data);
+    });
+  }
+
+  getPlaylist(playlistID:string):Promise<PlaylistData> {
+    return this.sendRequestToExpress('/playlist/' + encodeURIComponent(playlistID)).then((data) => {
+      return new PlaylistData(data);
+    });
+  }
+
+  getTracksForPlaylist(playlistID:string):Promise<TrackData[]> {
+    return this.sendRequestToExpress('/playlist-tracks/' + encodeURIComponent(playlistID)).then((data) => {
+      return data.items.map((item) => {
+        return new TrackData(item.track);
+      });
     });
   }
 

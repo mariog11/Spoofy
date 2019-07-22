@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArtistData } from '../../data/artist-data';
-import { TrackData } from '../../data/track-data';
-import { AlbumData } from '../../data/album-data';
-import { SpotifyService } from '../../services/spotify.service';
+import { TrackData } from '../../../../data/track-data';
+import { AlbumData } from '../../../../data/album-data';
+import { SpotifyService } from '../../../../services/spotify.service';
 
 @Component({
   selector: 'app-album-page',
@@ -20,6 +19,7 @@ export class AlbumPageComponent implements OnInit {
   ngOnInit() {
   	this.albumId = this.route.snapshot.paramMap.get('id');
     var _this = this;
+
     this.spotifyService.getAlbum(this.albumId).then(function(response){
       _this.album = response;
     }); 
@@ -27,5 +27,5 @@ export class AlbumPageComponent implements OnInit {
     this.spotifyService.getTracksForAlbum(this.albumId).then(function(response){
       _this.tracks = response;
     }); 
-}
+  }
 }

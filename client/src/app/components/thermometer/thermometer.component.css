@@ -1,4 +1,9 @@
 .progress {
 	margin: 10px;
 	height: 20px;
+	background-color: black;
+}
+
+.type p{
+	margin-bottom: 0;
 }

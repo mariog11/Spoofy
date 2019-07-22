@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-artists',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./artists.component.css']
 })
 export class ArtistsComponent implements OnInit {
+  searchString:string;
 
-  constructor() { }
+  constructor(private route:ActivatedRoute,private router:Router) { }
+  
+  onKey(event: any) {
+    this.searchString = event.target.value;
+  }
+
+  search() {
+    this.router.navigate(['search/' + this.searchString], { relativeTo: this.route});
+  }
 
   ngOnInit() {
   }
-
 }

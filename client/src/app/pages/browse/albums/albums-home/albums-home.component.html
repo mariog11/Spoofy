@@ -1,3 +1,10 @@
-<p>
-  albums-home works!
-</p>
+<div class="container" id="albums-home">
+  <div class="row">
+    <div class="col-12">
+        <h1>Album Library</h1>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-4" *ngFor="let resource of albums">
+        <app-album-card  [resource]='resource'></app-album-card>
+    </div>
+  </div>
+</div>
