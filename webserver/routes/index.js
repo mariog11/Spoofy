@@ -17,12 +17,10 @@ var my_client_secret = null;
 var access_token = null;
 var refresh_token = null;
 
-/*This function does not need to be edited.*/
 function writeTokenFile(callback) {
 	fs.writeFile('tokens.json', JSON.stringify({access_token: access_token, refresh_token: refresh_token}), callback);
 }
 
-/*This function does not need to be edited.*/
 function readTokenAndClientSecretFiles(callback) {
 	//This chains two promises together. First, client_secret.json will be read and parsed. Once it completes, tokens.json will be read and parsed.
 	//These files are read synchronously (one after another) intentionally to demonstrate how promises can be chained.
@@ -70,13 +68,12 @@ function refresh(callback) {
 	});
 }
 
-
 function makeAPIRequest(spotify_endpoint, res) {
 	var headers = {
 		'Content-Type':'application/x-www-form-urlencoded',
 		'Authorization': 'Bearer ' + access_token
 	};
-
+	let _this = this;
 	//TODO: use fetch() to make the API call.
 	return new Promise(function(resolve, reject){
 		fetch(spotify_endpoint, {
@@ -90,15 +87,15 @@ function makeAPIRequest(spotify_endpoint, res) {
 		//Once refresh() is working, check whether the status code is 401 (unauthorized)
 		}).catch(function(error){
 			//If so, refresh the access token and make the API call again.
-			this.refresh(function(){
+			console.log(error);
+			_this.refresh(function(){
 			});
-			this.makeAPIRequest(spotify_endpoint, res);
+			_this.makeAPIRequest(spotify_endpoint, res);
 			return error.message;
 		});
 	});
 }
-
-/*This function does not need to be edited.*/
+ 
 router.get('*', function(req, res, next) {
 	//Applies to all endpoints: load the token and client secret files if they haven't been loaded.
 	if(!loadedFiles) {
@@ -113,7 +110,7 @@ router.get('*', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-	var scopes = 'user-read-private user-read-email';
+	var scopes = 'user-read-private user-read-email user-top-read user-library-read user-follow-read playlist-read-private playlist-read-collaborative';
 
 	res.redirect('https://accounts.spotify.com/authorize' +
 	  '?response_type=code' +
@@ -153,18 +150,28 @@ router.get('/callback', function(req, res, next) {
 		});
 	});
 });
-
-/*This function does not need to be edited.*/
+ 
 router.get('/', function(req, res, next) {
 	res.send('Go to the <a href="/login">login page</a> to begin the oAuth flow.');
 });
 
-/*This function does not need to be edited.*/
+/* 
+	Account Detail
+*/
 router.get('/me', function(req, res, next) {
 	makeAPIRequest(spotify_base_uri + '/me', res);
 });
 
-/*This function does not need to be edited.*/
+/*
+	Browse
+*/
+router.get('/featured-playlists', function(req, res, next) {
+	makeAPIRequest(spotify_base_uri + '/browse/featured-playlists', res);
+});
+
+/*
+	Search
+*/
 router.get('/search/:category/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 	var category = req.params.category;
@@ -174,52 +181,82 @@ router.get('/search/:category/:resource', function(req, res, next) {
 	makeAPIRequest(spotify_base_uri + '/search?' + params, res);
 });
 
-/*This function does not need to be edited.*/
-router.get('/artist/:id', function(req, res, next) {
-	var id = req.params.id;
-	makeAPIRequest(spotify_base_uri + '/artists/' + id, res);
+/*
+	Tracks Section
+*/
+router.get('/user-tracks', function(req, res, next) {
+	makeAPIRequest(spotify_base_uri + '/me/tracks', res);
 });
 
-/*This function does not need to be edited.*/
-router.get('/artist-related-artists/:id', function(req, res, next) {
-	var id = req.params.id;
-	makeAPIRequest(spotify_base_uri + '/artists/' + id + '/related-artists', res);
-});
-
-/*This function does not need to be edited.*/
-router.get('/artist-albums/:id', function(req, res, next) {
-	var id = req.params.id;
-	makeAPIRequest(spotify_base_uri + '/artists/' + id + '/albums', res);
-});
-
-/*This function does not need to be edited.*/
-router.get('/artist-top-tracks/:id', function(req, res, next) {
-	var id = req.params.id;
-	makeAPIRequest(spotify_base_uri + '/artists/' + id + '/top-tracks?country=US', res);
-});
-
-/*This function does not need to be edited.*/
-router.get('/album/:id', function(req, res, next) {
-	var id = req.params.id;
-	makeAPIRequest(spotify_base_uri + '/albums/' + id, res);
-});
-
-/*This function does not need to be edited.*/
-router.get('/album-tracks/:id', function(req, res, next) {
-	var id = req.params.id;
-	makeAPIRequest(spotify_base_uri + '/albums/' + id + '/tracks', res);
-});
-
-/*This function does not need to be edited.*/
 router.get('/track/:id', function(req, res, next) {
 	var id = req.params.id;
 	makeAPIRequest(spotify_base_uri + '/tracks/' + id, res);
 });
 
-/*This function does not need to be edited.*/
 router.get('/track-audio-features/:id', function(req, res, next) {
 	var id = req.params.id;
 	makeAPIRequest(spotify_base_uri + '/audio-features/' + id, res);
+});
+
+/*
+	Albums Section
+*/
+router.get('/user-albums', function(req, res, next) {
+	makeAPIRequest(spotify_base_uri + '/me/albums', res);
+});
+
+router.get('/album/:id', function(req, res, next) {
+	var id = req.params.id;
+	makeAPIRequest(spotify_base_uri + '/albums/' + id, res);
+});
+
+router.get('/album-tracks/:id', function(req, res, next) {
+	var id = req.params.id;
+	makeAPIRequest(spotify_base_uri + '/albums/' + id + '/tracks', res);
+});
+
+/*
+	Artists Section
+*/
+router.get('/user-artists', function(req, res, next) {
+	makeAPIRequest(spotify_base_uri + '/me/following?type=artist', res);
+});
+
+router.get('/artist/:id', function(req, res, next) {
+	var id = req.params.id;
+	makeAPIRequest(spotify_base_uri + '/artists/' + id, res);
+});
+
+router.get('/artist-related-artists/:id', function(req, res, next) {
+	var id = req.params.id;
+	makeAPIRequest(spotify_base_uri + '/artists/' + id + '/related-artists', res);
+});
+
+router.get('/artist-albums/:id', function(req, res, next) {
+	var id = req.params.id;
+	makeAPIRequest(spotify_base_uri + '/artists/' + id + '/albums', res);
+});
+
+router.get('/artist-top-tracks/:id', function(req, res, next) {
+	var id = req.params.id;
+	makeAPIRequest(spotify_base_uri + '/artists/' + id + '/top-tracks?country=US', res);
+});
+
+/*
+	Playlists Section
+*/
+router.get('/user-playlists', function(req, res, next) {
+	makeAPIRequest(spotify_base_uri + '/me/playlists', res);
+});
+
+router.get('/playlist/:id', function(req, res, next) {
+	var id = req.params.id;
+	makeAPIRequest(spotify_base_uri + '/playlists/' + id, res);
+});
+
+router.get('/playlist-tracks/:id', function(req, res, next) {
+	var id = req.params.id;
+	makeAPIRequest(spotify_base_uri + '/playlists/' + id + '/tracks', res);
 });
 
 module.exports = router;
