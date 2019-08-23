@@ -1,16 +1,14 @@
 var express = require('express');
 var router = express.Router();
-//Fetch doesn't exist on server-side JavaScript, so we impoort a package which implements the functionality.
 var fetch = require('node-fetch');
 var fs = require('fs');
 
 var loadedFiles = false;
 
-const redirect_uri = 'http://localhost:8888/callback/';
-const client_uri = 'http://localhost:4200';
+const redirect_uri = 'https://spoofyrest.herokuapp.com/callback/';
+const client_uri = 'https://spoofy-client.firebaseapp.com/browse';
 const spotify_base_uri = 'https://api.spotify.com/v1';
 
-//These values will be loaded from client_secret.json
 var my_client_id = null;
 var my_client_secret = null;
 
@@ -22,9 +20,6 @@ function writeTokenFile(callback) {
 }
 
 function readTokenAndClientSecretFiles(callback) {
-	//This chains two promises together. First, client_secret.json will be read and parsed. Once it completes, tokens.json will be read and parsed.
-	//These files are read synchronously (one after another) intentionally to demonstrate how promises can be chained.
-	//Promise.all() could be used to conduct these two file reads asynchronously, which is more efficient.
 	fs.readFile('client_secret.json', (err, data) => {
 		data = JSON.parse(data);
 		my_client_id = data.client_id;
@@ -38,7 +33,7 @@ function readTokenAndClientSecretFiles(callback) {
 	});
 }
 
-function refresh(callback) {
+function refresh(callback, res) {
 	var _headers = {
 		'Authorization': 'Basic ' + Buffer.from(my_client_id + ':' + my_client_secret).toString('base64')
 	};
@@ -73,24 +68,26 @@ function makeAPIRequest(spotify_endpoint, res) {
 		'Content-Type':'application/x-www-form-urlencoded',
 		'Authorization': 'Bearer ' + access_token
 	};
-	let _this = this;
-	//TODO: use fetch() to make the API call.
+
+	res.set('Cache-Control','public, max-age=300, s-maxage=600');
+
 	return new Promise(function(resolve, reject){
 		fetch(spotify_endpoint, {
 			method: 'GET',
 			headers: headers
-		//parse the response send it back to the Angular client with res.json()
 		}).then(res=>{
 			return res.json();
 		}).then(info=>{
+			if(info.hasOwnProperty('error')){
+				throw info['error']['status'];
+			}
 			return res.json(info);
 		//Once refresh() is working, check whether the status code is 401 (unauthorized)
 		}).catch(function(error){
 			//If so, refresh the access token and make the API call again.
-			console.log(error);
-			_this.refresh(function(){
-			});
-			_this.makeAPIRequest(spotify_endpoint, res);
+			refresh(function(){
+				_this.makeAPIRequest(spotify_endpoint, res);
+			}, res);
 			return error.message;
 		});
 	});
