@@ -12,7 +12,7 @@ import { PlaylistData } from '../data/playlist-data';
   providedIn: 'root'
 })
 export class SpotifyService {
-	expressBaseUrl:string = 'http://localhost:8888';
+  expressBaseUrl:string = 'https://spoofyrest.herokuapp.com';
   constructor(private http:HttpClient) { }
 
   private sendRequestToExpress(endpoint:string):Promise<any> {
@@ -29,7 +29,7 @@ export class SpotifyService {
   }
   
   getUserTracks():Promise<TrackData[]> {
-    return this.sendRequestToExpress('/user-tracks/').then((data) => {
+    return this.sendRequestToExpress('/user-tracks').then((data) => {
       return data.items.map((trackObj) => {
         return new TrackData(trackObj.track);
       });
@@ -37,7 +37,7 @@ export class SpotifyService {
   }
 
   getUserArtists():Promise<ArtistData[]> {
-    return this.sendRequestToExpress('/user-artists/').then((data) => {
+    return this.sendRequestToExpress('/user-artists').then((data) => {
       return data.artists.items.map((artist) => {
         return new ArtistData(artist);
       });

@@ -6,7 +6,6 @@
 .profile-img{
     width:100px;
     height:auto;
-    border-radius: 50%;
     padding-bottom: 10px;
     transition: 0.3s;
 }

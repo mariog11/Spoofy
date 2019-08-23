@@ -1,25 +1,63 @@
-  <div class="jumbotron">
-    <div class="container text-center">
-      <h1 class="display-3">This is Spoofy.</h1>
-      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      <p><a class="btn btn-primary btn-lg" routerLink="browse" role="button">Try it out</a></p>
-    </div>
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1 class="display-3">This is Spoofy.</h1>
+    <p>All of Spotify's expansive library with none of the functionality. It is responsive though.</p>
+    <p><a class="btn btn-primary btn-lg" routerLink="browse" role="button">Try it out</a></p>
   </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+</div>
+<section id="s1">
+    <div class="container d-flex align-items-center sects" id="spotify-section">
+        <div class="row d-flex align-items-center">
+          <div class="col-12 col-lg-6 logo-column">
+            <img class="spotify-logo" src="assets/Spotify_logo_with_text.svg">
+          </div>
+          <div class="col-12 col-lg-6">
+              <h2>Spotify API</h2>
+              <p class="lead">
+                  Spoofy leverages the Spotify Web API to access its growing library of tracks, 
+                  albums, playlists, and artist in a platform-agnostic way.
+              </p>
+          </div>
       </div>
     </div>
-    <hr>
-  </div>
+</section>
+<section id="s2">
+    <div class="container d-flex align-items-center sects" id="frontend-section">
+        <div class="row d-flex align-items-center">
+          <div class="col-12 col-lg-6 logo-column">
+            <img class="other-logo" src="assets/angular.svg">
+            <img class="other-logo" src="assets/firebase.svg">
+          </div>
+          <div class="col-12 col-lg-6">
+              <h2>The Frontend</h2>
+              <p class="lead">
+                  Spoofy is a a single-page web application created using Angular 8. It makes use 
+                  of routing and templates to dynamically render pages for each and every piece 
+                  of content in the Spotify library. In addition, Firebase hosts the application.
+              </p>
+          </div>
+      </div>
+    </div>
+</section>
+<section id="s3">
+    <div class="container d-flex align-items-center sects" id="backend-section">
+        <div class="row d-flex align-items-center">
+          <div class="col-12 col-lg-6 logo-column" style="text-align: center">
+            <img class="other-logo" src="assets/node.svg">
+            <img class="other-logo" src="assets/heroku.svg">
+          </div>
+          <div class="col-12 col-lg-6">
+              <h2>The Backend</h2>
+              <p class="lead">
+                  Spoofy's backend is written using Express JS and hosted on Heroku. This is where 
+                  all the magic of Spoofy begins. The only way to gain access to Spotify content 
+                  through Spoofy is to give up your Spotify account credentials. Sort of. You have 
+                  to log into Spotify at their unique endpoint, then in return, Spoofy's backend
+                  gets access tokens to request content from Spotify. That's how it works in a nutshell. 
+                  The details are a bit more involved so if you're curious, there is more on that 
+                  <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/" target="_blank">here</a>. 
+              </p>
+          </div>
+      </div>
+    </div>
+</section>

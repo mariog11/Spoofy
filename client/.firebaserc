@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "spoofy-client",
+    "staging": "spoofy-client"
+  }
+}

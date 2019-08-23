@@ -1,5 +1,28 @@
+/* Sections */
 .jumbotron{
+    background-image: linear-gradient(to bottom, #222326, #543d5a, #a64d6a, #e5704f, #ebb312);
     margin-top:83px;
     border-radius: 0rem!important;
-    color: #000;
+    color: #FFF;
+}
+
+.sects{
+    min-height: 350px;
+}
+
+/* Individual Logos */
+.logo-column{
+    text-align: center;
+}
+
+.spotify-logo{
+    width: 80%;
+    height: auto;
+    padding: 15px;
+}
+
+.other-logo{
+    height: auto;
+    width: 35%;
+    padding: 15px;
 }
